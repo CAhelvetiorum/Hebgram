@@ -1,1 +1,224 @@
+/* Exercise-specific styling */
+.exercise {
+    position: relative;
+    transition: all 0.3s ease;
+}
 
+.exercise:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.conjugation-table {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.conjugation-row {
+    display: contents;
+}
+
+.conjugation-row label {
+    font-weight: 600;
+    color: var(--accent-color);
+    align-self: center;
+}
+
+.hebrew-input {
+    font-family: 'SBL Hebrew', 'Times New Roman', serif;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.hebrew-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+.given {
+    background: var(--light-gray);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.options {
+    margin: 1rem 0;
+}
+
+.option {
+    display: block;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    background: var(--light-gray);
+    border-color: var(--accent-color);
+}
+
+.option input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+/* Achievement notifications */
+.achievement-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #333;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.achievement-notification.show {
+    transform: translateX(0);
+}
+
+.achievement-icon {
+    font-size: 2rem;
+}
+
+.achievement-text h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.achievement-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Drag and drop exercises */
+.drag-drop-container {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.draggable-items {
+    flex: 1;
+}
+
+.drop-zones {
+    flex: 1;
+}
+
+.draggable {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    cursor: grab;
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.draggable:hover {
+    transform: scale(1.05);
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.drop-zone.drag-over {
+    border-color: var(--accent-color);
+    background: rgba(139, 69, 19, 0.1);
+}
+
+.drop-zone.filled {
+    border-style: solid;
+    background: var(--light-gray);
+}
+
+/* Progress visualization */
+.progress-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .conjugation-table {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .conjugation-row {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+    .drag-drop-container {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
