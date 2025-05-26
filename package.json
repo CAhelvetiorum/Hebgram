@@ -1,0 +1,14 @@
+{
+  "name": "hebrew-grammar-site",
+  "version": "1.0.0",
+  "description": "Interactive Classical Hebrew Grammar Website",
+  "scripts": {
+    "build": "python build_static.py",
+    "dev": "python app.py",
+    "test": "python -m pytest tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CAhelvetiorum/Hebgram.git"
+  }
+}
