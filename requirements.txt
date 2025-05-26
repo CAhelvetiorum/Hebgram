@@ -1,1 +1,4 @@
-
+Flask==2.3.3
+Jinja2==3.1.2
+unicodedata2==15.0.0
+pytest==7.4.0
