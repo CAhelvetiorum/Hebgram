@@ -1,1 +1,50 @@
-
+{
+  "alphabet": [
+    {
+      "id": "aleph_1",
+      "letter": "א",
+      "question": "What is the name of this letter?",
+      "correct_answers": ["aleph", "alef"],
+      "type": "text_input",
+      "difficulty": 1
+    },
+    {
+      "id": "beth_1",
+      "letter": "ב",
+      "question": "What is the name of this letter?",
+      "correct_answers": ["beth", "bet", "beit"],
+      "type": "text_input",
+      "difficulty": 1
+    }
+  ],
+  "nouns": [
+    {
+      "id": "noun_analysis_1",
+      "hebrew": "מְלָכִים",
+      "question": "Analyze this noun",
+      "correct_answer": {
+        "gender": "masculine",
+        "number": "plural",
+        "meaning": "kings"
+      },
+      "type": "multiple_choice",
+      "difficulty": 2
+    }
+  ],
+  "verbs": [
+    {
+      "id": "qal_perfect_1",
+      "root": "כתב",
+      "question": "Complete the Qal perfect conjugation",
+      "paradigm": {
+        "3ms": "כָּתַב",
+        "3fs": "כָּתְבָה",
+        "2ms": "כָּתַבְתָּ",
+        "2fs": "כָּתַבְתְּ",
+        "1cs": "כָּתַבְתִּי"
+      },
+      "type": "conjugation",
+      "difficulty": 3
+    }
+  ]
+}
