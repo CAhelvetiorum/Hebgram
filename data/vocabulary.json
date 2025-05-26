@@ -1,1 +1,30 @@
-
+{
+  "nouns": {
+    "מֶלֶךְ": {
+      "transliteration": "melek",
+      "meaning": "king",
+      "gender": "masculine",
+      "plural": "מְלָכִים",
+      "construct": "מֶלֶךְ"
+    },
+    "בַּיִת": {
+      "transliteration": "bayit",
+      "meaning": "house",
+      "gender": "masculine",
+      "plural": "בָּתִּים",
+      "construct": "בֵּית"
+    }
+  },
+  "verbs": {
+    "כתב": {
+      "meaning": "to write",
+      "binyan": "qal",
+      "paradigms": {
+        "perfect": {
+          "3ms": "כָּתַב",
+          "3fs": "כָּתְבָה"
+        }
+      }
+    }
+  }
+}
