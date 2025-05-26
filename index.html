@@ -1,1 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical Hebrew Grammar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Edward Tufte-inspired design principles */
+        :root {
+            --text-color: #2d2d2d;
+            --accent-color: #8b4513;
+            --hebrew-color: #1a472a;
+            --background: #fefefe;
+            --light-gray: #f8f8f8;
+            --border-color: #e5e5e5;
+            --correct-color: #2d5016;
+            --incorrect-color: #8b1538;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Typography hierarchy */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--hebrew-color);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 3rem 0 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--accent-color);
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Hebrew text styling */
+        .hebrew {
+            font-family: 'SBL Hebrew', 'Times New Roman', serif;
+            font-size: 1.4rem;
+            direction: rtl;
+            color: var(--hebrew-color);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* Tufte-style sidenotes */
+        .sidenote {
+            float: right;
+            clear: right;
+            margin-right: -12rem;
+            width: 10rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            vertical-align: baseline;
+            position: relative;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #666;
+        }
+
+        /* Exercise containers */
+        .exercise {
+            background: var(--light-gray);
+            border-left: 4px solid var(--accent-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .exercise-title {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Form elements */
+        input[type="text"], select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+        }
+
+        button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background: #704010;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Feedback styling */
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+        }
+
+        .feedback.correct {
+            background: rgba(45, 80, 22, 0.1);
+            border-left: 4px solid var(--correct-color);
+            color: var(--correct-color);
+        }
+
+        .feedback.incorrect {
+            background: rgba(139, 21, 56, 0.1);
+            border-left: 4px solid var(--incorrect-color);
+            color: var(--incorrect-color);
+        }
+
+        /* Progress indicator */
+        .progress {
+            width: 100%;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Table styling (Tufte-inspired) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .sidenote {
+                float: none;
+                margin-right: 0;
+                width: 100%;
+                margin-top: 1rem;
+                padding: 1rem;
+                background: var(--light-gray);
+                border-radius: 4px;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>מילון עברית עתיקה</h1>
+        <h1 style="font-size: 1.5rem; margin-top: -0.5rem; color: var(--text-color);">Classical Hebrew Grammar</h1>
+        <p style="font-style: italic; margin-bottom: 2rem;">An interactive guide to Biblical Hebrew morphology and syntax</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction" class="active">Introduction</a></li>
+            <li><a href="#alphabet">Alphabet</a></li>
+            <li><a href="#nouns">Nouns</a></li>
+            <li><a href="#verbs">Verbs</a></li>
+            <li><a href="#syntax">Syntax</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction to Classical Hebrew</h2>
+            <p>Classical Hebrew, the language of the Hebrew Bible, represents one of humanity's most significant literary and religious traditions. This interactive grammar guide follows the principles of clear, functional design—presenting information with maximum clarity and minimum visual clutter.</p>
+            
+            <div class="sidenote">
+                Hebrew reads from right to left, and the script consists of 22 consonantal letters with vowel points added by the Masoretes.
+            </div>
+
+            <p>The Hebrew writing system is fundamentally consonantal, with vowels indicated through a system of points (nikkud) developed by medieval Jewish scholars. Understanding this system is crucial for reading and analyzing Hebrew texts accurately.</p>
+        </section>
+
+        <section id="alphabet">
+            <h2>The Hebrew Alphabet</h2>
+            
+            <div class="exercise">
+                <div class="exercise-title">Exercise 1: Letter Recognition</div>
+                <div class="progress">
+                    <div class="progress-bar" id="progress1"></div>
+                </div>
+                
+                <div class="question" id="q1">
+                    <div class="question-text">What is the name of this letter?</div>
+                    <div class="hebrew" id="hebrew-letter">א</div>
+                    <input type="text" id="answer1" placeholder="Enter the letter name">
+                    <button onclick="checkAnswer(1)">Check Answer</button>
+                    <div class="feedback" id="feedback1" style="display: none;"></div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Letter</th>
+                        <th>Name</th>
+                        <th>Transliteration</th>
+                        <th>Numerical Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="hebrew">א</td><td>Aleph</td><td>'</td><td>1</td></tr>
+                    <tr><td class="hebrew">ב</td><td>Beth</td><td>b/v</td><td>2</td></tr>
+                    <tr><td class="hebrew">ג</td><td>Gimel</td><td>g</td><td>3</td></tr>
+                    <tr><td class="hebrew">ד</td><td>Daleth</td><td>d</td><td>4</td></tr>
+                    <tr><td class="hebrew">ה</td><td>He</td><td>h</td><td>5</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="nouns">
+            <h2>Hebrew Nouns</h2>
+            <p>Hebrew nouns are characterized by gender (masculine/feminine), number (singular/dual/plural), and state (absolute/construct). The noun system forms the foundation for understanding Hebrew syntax.</p>
+
+            <div class="sidenote">
+                The dual number, rare in modern languages, appears frequently in Hebrew for paired objects like hands, eyes, and temporal expressions.
+            </div>
+
+            <h3>Gender and Number</h3>
+            <p>Most Hebrew nouns follow predictable patterns for gender and number formation. Feminine nouns typically end in ה- or ת-, while masculine nouns usually have no distinctive ending.</p>
+
+            <div class="exercise">
+                <div class="exercise-title">Exercise 2: Noun Analysis</div>
+                <div class="progress">
+                    <div class="progress-bar" id="progress2"></div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Analyze the following noun:</div>
+                    <div class="hebrew">מְלָכִים</div>
+                    <p>Gender: 
+                        <select id="gender2">
+                            <option value="">Select...</option>
+                            <option value="masculine">Masculine</option>
+                            <option value="feminine">Feminine</option>
+                        </select>
+                    </p>
+                    <p>Number: 
+                        <select id="number2">
+                            <option value="">Select...</option>
+                            <option value="singular">Singular</option>
+                            <option value="dual">Dual</option>
+                            <option value="plural">Plural</option>
+                        </select>
+                    </p>
+                    <p>Root meaning: 
+                        <input type="text" id="root2" placeholder="Enter the basic meaning">
+                    </p>
+                    <button onclick="checkNounAnalysis()">Check Analysis</button>
+                    <div class="feedback" id="feedback2" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="verbs">
+            <h2>Hebrew Verbs</h2>
+            <p>The Hebrew verbal system operates on a root-and-pattern morphology. Most verbs derive from three-consonant roots (shoresh) that combine with various patterns (mishkalim) to express different meanings and grammatical relationships.</p>
+
+            <div class="exercise">
+                <div class="exercise-title">Exercise 3: Verb Conjugation</div>
+                <div class="progress">
+                    <div class="progress-bar" id="progress3"></div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Complete the Qal perfect conjugation of כתב (to write):</div>
+                    <p>3ms: <div class="hebrew">כָּתַב</div></p>
+                    <p>3fs: <input type="text" id="verb-3fs" placeholder="Enter Hebrew form" style="direction: rtl;"></p>
+                    <p>2ms: <input type="text" id="verb-2ms" placeholder="Enter Hebrew form" style="direction: rtl;"></p>
+                    <p>1cs: <input type="text" id="verb-1cs" placeholder="Enter Hebrew form" style="direction: rtl;"></p>
+                    <button onclick="checkVerbConjugation()">Check Conjugation</button>
+                    <div class="feedback" id="feedback3" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Exercise data and logic
+        const exercises = {
+            letterNames: [
+                {letter: 'א', name: 'aleph', alternatives: ['alef']},
+                {letter: 'ב', name: 'beth', alternatives: ['bet', 'beit']},
+                {letter: 'ג', name: 'gimel', alternatives: ['gimmel']},
+                {letter: 'ד', name: 'daleth', alternatives: ['dalet']},
+                {letter: 'ה', name: 'he', alternatives: ['heh', 'hay']}
+            ],
+            currentLetter: 0
+        };
+
+        let scores = {
+            exercise1: 0,
+            total1: 0,
+            exercise2: 0,
+            total2: 0,
+            exercise3: 0,
+            total3: 0
+        };
+
+        function checkAnswer(exerciseNum) {
+            if (exerciseNum === 1) {
+                const answer = document.getElementById('answer1').value.toLowerCase().trim();
+                const currentEx = exercises.letterNames[exercises.currentLetter];
+                const isCorrect = answer === currentEx.name || currentEx.alternatives.includes(answer);
+                
+                scores.total1++;
+                if (isCorrect) scores.exercise1++;
+                
+                showFeedback('feedback1', isCorrect, 
+                    `Correct! The letter ${currentEx.letter} is called "${currentEx.name}".`,
+                    `Incorrect. The letter ${currentEx.letter} is called "${currentEx.name}". ${getLetterExplanation(currentEx.letter)}`
+                );
+                
+                updateProgress('progress1', scores.exercise1, scores.total1);
+                
+                // Load next letter after a delay
+                setTimeout(() => {
+                    exercises.currentLetter = (exercises.currentLetter + 1) % exercises.letterNames.length;
+                    loadNextLetter();
+                }, 2000);
+            }
+        }
+
+        function checkNounAnalysis() {
+            const gender = document.getElementById('gender2').value;
+            const number = document.getElementById('number2').value;
+            const root = document.getElementById('root2').value.toLowerCase().trim();
+            
+            scores.total2++;
+            const isCorrect = gender === 'masculine' && number === 'plural' && 
+                            (root === 'king' || root === 'kings' || root === 'ruler');
+            
+            if (isCorrect) scores.exercise2++;
+            
+            showFeedback('feedback2', isCorrect,
+                'Excellent! מְלָכִים is masculine plural meaning "kings" from the root מלך.',
+                'The word מְלָכִים is masculine plural (note the ים- ending) meaning "kings" from the root מלך (to rule/reign). The vowel pattern indicates plural masculine nouns.'
+            );
+            
+            updateProgress('progress2', scores.exercise2, scores.total2);
+        }
+
+        function checkVerbConjugation() {
+            const answers = {
+                '3fs': document.getElementById('verb-3fs').value.trim(),
+                '2ms': document.getElementById('verb-2ms').value.trim(),
+                '1cs': document.getElementById('verb-1cs').value.trim()
+            };
+            
+            const correct = {
+                '3fs': 'כָּתְבָה',
+                '2ms': 'כָּתַבְתָּ',
+                '1cs': 'כָּתַבְתִּי'
+            };
+            
+            scores.total3++;
+            const isCorrect = answers['3fs'] === correct['3fs'] && 
+                            answers['2ms'] === correct['2ms'] && 
+                            answers['1cs'] === correct['1cs'];
+            
+            if (isCorrect) scores.exercise3++;
+            
+            showFeedback('feedback3', isCorrect,
+                'Perfect conjugation! You understand the Qal perfect pattern.',
+                `Correct forms: 3fs: ${correct['3fs']}, 2ms: ${correct['2ms']}, 1cs: ${correct['1cs']}. Notice how the suffixes attach to the root כתב.`
+            );
+            
+            updateProgress('progress3', scores.exercise3, scores.total3);
+        }
+
+        function showFeedback(elementId, isCorrect, correctMsg, incorrectMsg) {
+            const feedback = document.getElementById(elementId);
+            feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedback.textContent = isCorrect ? correctMsg : incorrectMsg;
+            feedback.style.display = 'block';
+        }
+
+        function updateProgress(progressId, score, total) {
+            const progressBar = document.getElementById(progressId);
+            const percentage = total > 0 ? (score / total) * 100 : 0;
+            progressBar.style.width = percentage + '%';
+        }
+
+        function loadNextLetter() {
+            const currentEx = exercises.letterNames[exercises.currentLetter];
+            document.getElementById('hebrew-letter').textContent = currentEx.letter;
+            document.getElementById('answer1').value = '';
+            document.getElementById('feedback1').style.display = 'none';
+        }
+
+        function getLetterExplanation(letter) {
+            const explanations = {
+                'א': 'Aleph is a silent consonant, often called a glottal stop.',
+                'ב': 'Beth can be pronounced as "b" (with dagesh) or "v" (without dagesh).',
+                'ג': 'Gimel is always pronounced as a hard "g" sound.',
+                'ד': 'Daleth is pronounced as "d".',
+                'ה': 'He is pronounced as "h" and often appears at the end of feminine nouns.'
+            };
+            return explanations[letter] || '';
+        }
+
+        // Navigation functionality
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const target = this.getAttribute('href').substring(1);
+                document.getElementById(target).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Initialize
+        loadNextLetter();
+    </script>
+</body>
+</html>
